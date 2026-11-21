@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Stepora",
+    "slug": "stepora",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "stepora",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#020617"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.stepora.challenge",
+      "infoPlist": {
+        "NSHealthShareUsageDescription": "Stepora needs access to your step count data from Apple Health to track your walking activity, update challenge progress, and compute live group leaderboards.",
+        "NSHealthUpdateUsageDescription": "Stepora requires health access to synchronize walking progress."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#020617"
+      },
+      "package": "app.stepora.challenge",
+      "permissions": [
+        "android.permission.ACTIVITY_RECOGNITION",
+        "android.permission.health.READ_STEPS",
+        "android.permission.health.READ_TOTAL_CALORIES_BURNED"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-router"]
+  }
+}

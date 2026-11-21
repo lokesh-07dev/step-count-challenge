@@ -1,0 +1,35 @@
+{
+  "name": "@stepora/backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stepora REST API powered by Hono and Cloudflare Workers with Neon PostgreSQL",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "node --import tsx src/local.ts",
+    "dev:wrangler": "wrangler dev",
+    "build": "wrangler deploy --dry-run",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@neondatabase/serverless": "^0.10.4",
+    "@stepora/shared": "*",
+    "drizzle-orm": "^0.38.3",
+    "hono": "^4.6.14",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/node": "^22.10.2",
+    "drizzle-kit": "^0.30.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.99.0"
+  }
+}

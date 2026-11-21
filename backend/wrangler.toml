@@ -1,0 +1,16 @@
+name = "stepora-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENVIRONMENT = "development"
+CORS_ORIGIN = "http://localhost:5173,http://localhost:8081,exp://localhost:8081"
+
+# Secrets to be configured via `wrangler secret put <KEY>`:
+# - DATABASE_URL
+# - BETTER_AUTH_SECRET
+# - R2_ACCOUNT_ID
+# - R2_ACCESS_KEY_ID
+# - R2_SECRET_ACCESS_KEY
+
