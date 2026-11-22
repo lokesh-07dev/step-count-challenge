@@ -7,6 +7,8 @@ import { authRouter } from "./routes/auth";
 import { activityRouter } from "./routes/activity";
 import { challengesRouter } from "./routes/challenges";
 import { groupsRouter } from "./routes/groups";
+import { leaderboardRouter } from "./routes/leaderboard";
+import { achievementsRouter } from "./routes/achievements";
 
 export const app = new Hono();
 
@@ -24,6 +26,8 @@ app.route("/api/v1/auth", authRouter);
 app.route("/api/v1/activity", activityRouter);
 app.route("/api/v1/individual-challenges", challengesRouter);
 app.route("/api/v1/groups", groupsRouter);
+app.route("/api/v1/leaderboard", leaderboardRouter);
+app.route("/api/v1/achievements", achievementsRouter);
 
 // 404 Handler
 app.notFound((c) => {

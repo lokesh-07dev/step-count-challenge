@@ -1,10 +1,13 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Footprints, Trophy, Users, LayoutDashboard, Smartphone } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Footprints, Trophy, Users, LayoutDashboard, Smartphone, LogOut, User } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 import { APP_NAME } from "@stepora/shared";
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, signOut } = useAuth();
 
   const navLinks = [
     { label: "Home", path: "/" },
@@ -12,6 +15,11 @@ export const Navbar: React.FC = () => {
     { label: "Challenges", path: "/challenges", icon: Trophy },
     { label: "Groups", path: "/groups", icon: Users },
   ];
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/login");
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
@@ -45,14 +53,45 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-900/60 bg-emerald-950/40 text-emerald-400 text-xs font-medium">
             <Smartphone className="h-3.5 w-3.5" />
-            <span>Mobile Synced</span>
+            <span>Health Sync Active</span>
           </div>
-          <Link
-            to="/dashboard"
-            className="px-4 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-slate-950 text-sm font-semibold transition-all shadow-md shadow-brand-500/20"
-          >
-            Open Dashboard
-          </Link>
+
+          {isAuthenticated && user ? (
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80">
+                {user.image ? (
+                  <img src={user.image} alt={user.name} className="h-6 w-6 rounded-full object-cover" />
+                ) : (
+                  <div className="h-6 w-6 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-xs font-bold">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <span className="text-xs font-semibold text-slate-200 hidden sm:inline">{user.name}</span>
+              </div>
+              <button
+                onClick={handleLogout}
+                title="Sign out"
+                className="p-2 rounded-xl border border-slate-800 hover:bg-slate-900 text-slate-400 hover:text-rose-400 transition-colors"
+              >
+                <LogOut className="h-4 w-4" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/login"
+                className="px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                className="px-4 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-slate-950 text-sm font-semibold transition-all shadow-md shadow-brand-500/20"
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>

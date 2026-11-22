@@ -26,6 +26,18 @@ export default function RootLayout() {
               headerShown: true,
             }}
           />
+          <Stack.Screen
+            name="login"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="register"
+            options={{
+              headerShown: false,
+            }}
+          />
         </Stack>
       </QueryClientProvider>
     </SafeAreaProvider>
